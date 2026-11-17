@@ -24,6 +24,7 @@ import { companyPresentation } from "@/lib/company-presentation.mjs";
 import { ApplyNext } from "@/components/apply-next";
 import { resolveHeroState, mayClaimAllClear, showsQueue, missingSourceLabel, displayCounts } from "@/lib/home/hero-state.mjs";
 import { homeFollowupRemainder } from "@/lib/home/followups-shown.mjs";
+import { useTrackerLiveSync } from "@/lib/use-tracker-live-sync";
 
 // The retention "Today": a dual-loop action queue (the maintainer's
 // "N new matches this week · M follow-ups due"). SUPPLY loop = fresh free-scan
@@ -106,19 +107,17 @@ export function TodayDashboard({
 
   useEffect(() => {
     refetch();
-    // A worker (evaluate/pdf) just wrote a real tracker row — refresh the server
-    // snapshot (applications/inbox props) + the client loops so the freshly-scored
-    // role appears in "Awaiting your decision" without a manual reload.
-    const onDone = () => {
-      router.refresh();
-      refetch();
-    };
-    window.addEventListener("co-job-done", onDone);
     return () => {
-      window.removeEventListener("co-job-done", onDone);
       requestGeneration.current += 1;
     };
-  }, [refetch, router]);
+  }, [refetch]);
+
+  useTrackerLiveSync({
+    onTrackerChanged: useCallback(() => {
+      router.refresh();
+      refetch();
+    }, [router, refetch]),
+  });
 
   // A Skip or Applied click removes its card on refresh, so the undo lives here.
   useEffect(() => {

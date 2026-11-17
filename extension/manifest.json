@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Career-Ops Autofill Companion",
+  "version": "1.0.0",
+  "description": "Autofill job applications from your local Career-Ops tracker, tailored PDFs/Q&As, and reusable personal Q&A memory. Never auto-submits.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAptcBPstz0EdGAZyVYYAOGW8NELwhRq5AzUSWEkMpOhONXVBq6JmcJ106qDWgOkOr6HttdMXIGklSOQLLExQ59U+tr0CzSphuUINoRsMwZaEHBmtcQ32j4fmpPn6CYW1jvSvV4ELQ3hbVInp2NQaJg1RDOzOrsb8/uNtreB5F3rdspKmPpA5R32Hge0ka3nnHYqZzuUm/pRuj81sTRcMF74aWPh7VUs/akL9gqtgxfGgxFwIaVoJMH39qaoNEo2K/lPkfuREBoN8RuqisDyLIwyIgVnzi4cIGk5AQIjkrttyii9XS0GOCYeWB7rpuY47hJjfzdOVscKwCXRRaz+d2hwIDAQAB",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "sidePanel",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:3000/*",
+    "http://localhost:3000/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "action": {
+    "default_title": "Open Career-Ops Autofill Companion"
+  }
+}
+

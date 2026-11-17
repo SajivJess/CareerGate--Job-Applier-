@@ -33,6 +33,7 @@ import { trackerEmptyPresentation, trackerEmptyState, type TrackerEmptyState } f
 import { trackerEmptyMessage } from "@/lib/tracker-empty.mjs";
 import { listEntrySync } from "@/lib/history-back.mjs";
 import { pipelineFindRolesHref } from "@/lib/scan-on-load.mjs";
+import { useTrackerLiveSync } from "@/lib/use-tracker-live-sync";
 
 type Tab = (typeof PIPELINE_TABS)[number];
 type SavedView = NonNullable<ReturnType<typeof normalizeView>>;
@@ -153,6 +154,12 @@ export function PipelineView({
   useEffect(() => {
     if (!isPending) setPendingTab(null);
   }, [isPending]);
+
+  useTrackerLiveSync({
+    onTrackerChanged: useCallback(() => {
+      router.refresh();
+    }, [router]),
+  });
 
   useEffect(() => {
     try {

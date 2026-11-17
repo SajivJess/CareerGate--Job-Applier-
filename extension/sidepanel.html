@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Career-Ops Autofill Companion</title>
+<link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+<div class="shell">
+  <div class="tabs">
+    <button id="tabFormBtn" class="tab-btn active" type="button">Active Form</button>
+    <button id="tabMemoryBtn" class="tab-btn" type="button">Saved Q&amp;A Memory (<span id="memCount">0</span>)</button>
+  </div>
+
+  <section id="formPanel">
+    <div id="connCard" class="card">
+      <div class="muted">Connecting to <code>http://127.0.0.1:3000</code>…</div>
+    </div>
+
+    <div id="matchCard" class="card hidden"></div>
+    <div id="linkedinCard" class="card hidden"></div>
+
+    <div class="card">
+      <button id="scanBtn" class="primary" type="button">Scan &amp; Autofill Form ⚡</button>
+      <div class="row" style="margin-top:8px; justify-content:space-between;">
+        <span class="muted">Never auto-submits or touches CAPTCHAs</span>
+        <button id="refreshCtxBtn" type="button">Sync</button>
+      </div>
+      <div id="scanStats" class="muted" style="margin-top:6px;"></div>
+    </div>
+
+    <div id="askCard" class="card hidden">
+      <h2>New / Personal Questions (Ask Once, Reuse Forever)</h2>
+      <div class="muted" style="margin-bottom:8px;">Answer below and click <strong>Save &amp; Fill</strong> — your answer fills the form now and auto-fills on every future application asking this question.</div>
+      <div id="askList"></div>
+    </div>
+
+    <div id="filledCard" class="card hidden">
+      <details open>
+        <summary style="cursor:pointer;font-weight:600;color:#86efac;">Auto-Filled Controls (<span id="filledCount">0</span>)</summary>
+        <div id="filledList" style="margin-top:6px;"></div>
+      </details>
+    </div>
+
+    <div id="trackerCard" class="card hidden"></div>
+  </section>
+
+  <section id="memoryPanel" class="hidden">
+    <div class="card">
+      <input id="memSearch" type="text" placeholder="Search saved questions or answers…" />
+      <div id="memList" style="margin-top:8px;"></div>
+    </div>
+  </section>
+</div>
+
+<script src="matcher.js"></script>
+<script src="sidepanel.js"></script>
+</body>
+</html>
+
